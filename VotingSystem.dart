@@ -109,6 +109,10 @@ void findWinner(Map<String,int>candidates){
   }
 print("Winner Candidate:");
 
+
+
+
+
   String winner=candidates.keys.first;
   int heightVote=candidates[winner]!;
   for(var candidate in candidates.entries){
@@ -118,4 +122,13 @@ print("Winner Candidate:");
     }
   }
 print("Candidate name: ${winner} voted get is:$heightVote");
+
+
+//// very very important that you can use this two line       //vvi
+// var heightVote=candidates.entries.reduce((a,b)=>a.value>=b.value? a:b);
+// print("Candidate name: ${heightVote.key} voted get is :${heightVote.value}");
+
+
+
+
 }
