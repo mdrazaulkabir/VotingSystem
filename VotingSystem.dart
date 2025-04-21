@@ -59,10 +59,9 @@ void addCandidate(Map<String,int>candidates){
     // candidates[name]=0;                 ////Single entry
     candidates.addAll({name: 0});           ////Single or multiple entries   vvi
 
-
-
       print("Candidate $name added successfully!");
     }
+
     else{
       print("Candidate name: $name is already exited in voted");
     }
@@ -75,6 +74,7 @@ void addCandidate(Map<String,int>candidates){
 void viewCandiate(Map<String,int>candidates){
   if(candidates.isEmpty){
     print("There is not available candidate add first:");
+    return;            //// Exit without doing anything further    vvi
   }
  else{
    print("List of candidate:");
@@ -93,16 +93,20 @@ void castCandidate(Map<String,int>candidates){
    print("Enter your name Cast vote for candidate ");
   String? name=stdin.readLineSync()!;
 
+
+  ////here this two if condition will be same work 
   // if(candidates.containsKey(name)){
   //   candidates[name]=candidates[name]!+1;
   //   print("Successfully vote caste for candiate $name");
   // }
 
-  // best way to update               vvi
+  //// best way to update               vvi
   if (candidates.containsKey(name)) {
     candidates.update(name, (value) => value + 1); // OR use candidates[name]! + 1
     print("Successfully vote caste for candidate $name");
   }
+
+
 
   else{
     print("Invalid candidate. Try again!");
@@ -115,9 +119,11 @@ void viewResult(Map<String,int>candidates){
   if(candidates.isEmpty){
     print("There is no result fist need to vote");
   }
-  print("Voting result :");
+  else{
+    print("Voting result :");
   for(var candidate in candidates.entries){
     print("Name:${candidate.key} voted gets :${candidate.value}");
+  }
   }
 
 }
@@ -125,29 +131,26 @@ void viewResult(Map<String,int>candidates){
 void findWinner(Map<String,int>candidates){
   if(candidates.isEmpty){
     print("No result availble because no one added and voted:");
+    return;    ////// Exit without doing anything further      vvi
+  
   }
-print("Winner Candidate:");
-
-
-
-
-
+  else{
+    print("Winner Candidate:");
   String winner=candidates.keys.first;
   int heightVote=candidates[winner]!;
+
   for(var candidate in candidates.entries){
-    if(candidate.value>candidates[winner]!){
+    if(candidate.value>heightVote){
       winner=candidate.key;
       heightVote=candidate.value;
     }
   }
 print("Candidate name: ${winner} voted get is:$heightVote");
-
-
 //// very very important that you can use this two line       //vvi
 // var heightVote=candidates.entries.reduce((a,b)=>a.value>=b.value? a:b);
 // print("Candidate name: ${heightVote.key} voted get is :${heightVote.value}");
 
-
+  }
 
 
 }
