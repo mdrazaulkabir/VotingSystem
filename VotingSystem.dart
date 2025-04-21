@@ -54,7 +54,13 @@ void addCandidate(Map<String,int>candidates){
   String name=stdin.readLineSync()!;
   if(name!=null&&name.isNotEmpty){
     if(!candidates.containsKey(name)){
-      candidates[name]=0;
+
+    //this two line will be same work
+    // candidates[name]=0;                 ////Single entry
+    candidates.addAll({name: 0});           ////Single or multiple entries   vvi
+
+
+
       print("Candidate $name added successfully!");
     }
     else{
@@ -70,10 +76,12 @@ void viewCandiate(Map<String,int>candidates){
   if(candidates.isEmpty){
     print("There is not available candidate add first:");
   }
-  print("List of candidate:");
+ else{
+   print("List of candidate:");
   for(var candiate in candidates.keys){
     print("The candidate name is : ${candiate}");
   }
+ }
 
 }
 
@@ -81,15 +89,26 @@ void castCandidate(Map<String,int>candidates){
   if(candidates.isEmpty){
     print("There is not available candidate add first:");
   }
-  print("Enter your name Cast vote for candidate ");
+ else{
+   print("Enter your name Cast vote for candidate ");
   String? name=stdin.readLineSync()!;
-  if(candidates.containsKey(name)){
-    candidates[name]=candidates[name]!+1;
-    print("Successfully vote caste for candiate $name");
+
+  // if(candidates.containsKey(name)){
+  //   candidates[name]=candidates[name]!+1;
+  //   print("Successfully vote caste for candiate $name");
+  // }
+
+  // best way to update               vvi
+  if (candidates.containsKey(name)) {
+    candidates.update(name, (value) => value + 1); // OR use candidates[name]! + 1
+    print("Successfully vote caste for candidate $name");
   }
+
   else{
     print("Invalid candidate. Try again!");
   }
+ }
+
 }
 
 void viewResult(Map<String,int>candidates){
